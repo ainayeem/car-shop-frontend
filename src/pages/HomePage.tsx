@@ -1,7 +1,11 @@
+import Featured from "../components/featured/Featured";
+import HeroSection from "../components/heroSection/HeroSection";
+
 const HomePage = () => {
   return (
     <div>
-      <h1>This is HomePage Component</h1>
+      <HeroSection />
+      <Featured />
     </div>
   );
 };

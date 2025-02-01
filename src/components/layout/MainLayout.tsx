@@ -82,7 +82,12 @@ const MainLayout = () => {
               {navbarItems}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          {/* <a className="btn btn-ghost text-xl"></a> */}
+          <div className="text-3xl font-bold flex items-center">
+            <Link to="/">
+              <span className="text-customYellow">Car</span>Shop
+            </Link>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-gray-500 font-semibold gap-2">
@@ -90,7 +95,39 @@ const MainLayout = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div>cart</div>
+          {/*  */}
+          <div className="">
+            <Link
+              to="/cart"
+              className="relative flex items-center bg-yellow-100 hover:bg-customYellowHover duration-500 p-1 rounded-full hover: transition-all ease-in-out"
+            >
+              <div className="bg-customYellow p-2 rounded-full flex items-center justify-center relative">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart stroke-white"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                  <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                  <path d="M17 17h-11v-14h-2" />
+                  <path d="M6 5l14 1l-1 7h-13" />
+                </svg>
+
+                <span className="absolute bottom-8 left-10 w-5 flex items-center justify-center text-xs font-semibold text-white bg-red-500 rounded-full border-2 border-white -translate-x-2 translate-y-2">
+                  2
+                </span>
+              </div>
+            </Link>
+            {/*  */}
+          </div>
         </div>
       </div>
       <Outlet />
