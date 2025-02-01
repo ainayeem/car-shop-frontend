@@ -10,6 +10,7 @@ import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Shop from "../pages/Shop";
+import VerifyPayment from "../pages/VerifyPayment";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "order/verify-payment",
+        element: <VerifyPayment />,
+      },
     ],
   },
   {
@@ -47,11 +56,11 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "adminDashboard",
+        path: "admin-dashboard",
         element: <AdminDashboard />,
       },
       {
-        path: "createProduct",
+        path: "create-product",
         element: <CreateProduct />,
       },
     ],

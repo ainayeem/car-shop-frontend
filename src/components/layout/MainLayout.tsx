@@ -8,6 +8,7 @@ const userRole = {
 };
 
 const MainLayout = () => {
+  const cartData = useAppSelector((state) => state.cart);
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -122,7 +123,7 @@ const MainLayout = () => {
                 </svg>
 
                 <span className="absolute bottom-8 left-10 w-5 flex items-center justify-center text-xs font-semibold text-white bg-red-500 rounded-full border-2 border-white -translate-x-2 translate-y-2">
-                  2
+                  {cartData.items.length}
                 </span>
               </div>
             </Link>

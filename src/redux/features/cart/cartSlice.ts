@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "sonner";
 
 export interface ICartItem {
   product: string; // Product ID
@@ -39,6 +40,7 @@ const cartSlice = createSlice({
       state.totalPrice += action.payload.price * action.payload.quantity;
     },
     removeFromCart(state, action: PayloadAction<string>) {
+      toast.warning("Item removed");
       const itemId = action.payload;
       const existingItem = state.items.find((item) => item.product === itemId);
       if (existingItem) {
@@ -52,6 +54,8 @@ const cartSlice = createSlice({
       action: PayloadAction<{ id: string; quantity: number }>
     ) {
       const { id, quantity } = action.payload;
+      console.log("🚀 ~ quantity:", quantity);
+      console.log("🚀 ~ id:", id);
       const existingItem = state.items.find((item) => item.product === id);
       if (existingItem && quantity > 0) {
         const quantityDifference = quantity - existingItem.quantity;

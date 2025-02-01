@@ -1,7 +1,18 @@
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { useAppDispatch } from "../../redux/hooks";
 
-const ProductCard = ({ product }) => {
+export interface IProduct {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  quantity: number;
+  imageUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+const ProductCard = ({ product }: { product: IProduct }) => {
   //   console.log("🚀 ~ ProductCard ~ product:", product);
   const dispatch = useAppDispatch();
 
@@ -13,7 +24,7 @@ const ProductCard = ({ product }) => {
         name: product.name,
         price: product.price,
         quantity: 1,
-        stock: product.stock,
+        stock: product.quantity,
         // imageUrl: product.imageUrl as string,
       })
     );
