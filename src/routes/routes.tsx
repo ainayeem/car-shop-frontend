@@ -10,6 +10,7 @@ import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Shop from "../pages/Shop";
+import SingleProduct from "../pages/SingleProduct";
 import VerifyPayment from "../pages/VerifyPayment";
 
 const router = createBrowserRouter([
@@ -38,12 +39,12 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "cart",
-        element: <Cart />,
-      },
-      {
         path: "order/verify-payment",
         element: <VerifyPayment />,
+      },
+      {
+        path: "shop/:productId",
+        element: <SingleProduct />,
       },
     ],
   },

@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { addToCart } from "../../redux/features/cart/cartSlice";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 export interface IProduct {
   _id: string;
@@ -13,11 +16,16 @@ export interface IProduct {
 }
 
 const ProductCard = ({ product }: { product: IProduct }) => {
+  const user = useAppSelector(selectCurrentUser);
   //   console.log("🚀 ~ ProductCard ~ product:", product);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
-    console.log("in cart functon");
+    if (!user) {
+      toast.warning("Please log in to add items to the cart.");
+      return;
+    }
+    // console.log("in cart functon");
     dispatch(
       addToCart({
         product: product._id,
@@ -28,15 +36,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         // imageUrl: product.imageUrl as string,
       })
     );
+    toast.success(`${product.name} added to your cart!`);
   };
 
   return (
     <div>
       <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">
-        {/* <p className="font-semibold text-xs px-2 py-1 text-lime-700 bg-lime-200 rounded-l-full absolute top-3 right-0">
-          % Off
-        </p> */}
-
         <img
           className="h-40 mx-auto"
           src={"/placeholder.svg"}
@@ -76,9 +81,11 @@ const ProductCard = ({ product }: { product: IProduct }) => {
             </button>
           </div>
           <div className="tooltip ml-4" data-tip="Quick View">
-            <button className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full">
-              view
-            </button>
+            <Link to={product._id}>
+              <button className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full">
+                view
+              </button>
+            </Link>
           </div>
         </div>
       </div>

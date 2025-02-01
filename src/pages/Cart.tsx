@@ -153,7 +153,7 @@ const Cart = () => {
                       onClick={handlePlaceOrder}
                       className="btn bg-customYellow hover:bg-customYellowHover w-full uppercase text-white tracking-wide"
                     >
-                      Checkout
+                      Order Now
                     </button>
                   </div>
                 </div>
