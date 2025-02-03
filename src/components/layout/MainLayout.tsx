@@ -19,8 +19,7 @@ const MainLayout = () => {
   if (token) {
     user = verifyToken(token);
   }
-  const userRoleValue = user?.role;
-
+  const userRoleValue = (user as { role: string })?.role;
   const handleLogout = () => {
     dispatch(logout());
     dispatch(clearCart());
@@ -30,9 +29,14 @@ const MainLayout = () => {
   const navbarItems = (
     <>
       {userRoleValue === userRole.ADMIN && (
-        <li>
-          <Link to="/admin/adminDashboard">Dashboard</Link>
-        </li>
+        <>
+          <li>
+            <Link to="/admin/admin-dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/admin/create-product">Create Product</Link>
+          </li>
+        </>
       )}
       <li>
         <Link to="/">Home</Link>
@@ -40,9 +44,14 @@ const MainLayout = () => {
       <li>
         <Link to="/shop">Shop</Link>
       </li>
-      <li>
-        <Link to="/blog">Blog</Link>
-      </li>
+      {user ? (
+        <li>
+          <Link to="/my-order">My Order</Link>
+        </li>
+      ) : (
+        ""
+      )}
+
       <li>
         <Link to="/about">About</Link>
       </li>
@@ -103,7 +112,7 @@ const MainLayout = () => {
               {navbarItems}
             </ul>
           </div>
-          <div className="navbar-end ">
+          <div className="navbar-end gap-1">
             {/*  */}
             <div className="">
               <Link
@@ -130,7 +139,7 @@ const MainLayout = () => {
                     <path d="M6 5l14 1l-1 7h-13" />
                   </svg>
 
-                  <span className="absolute bottom-8 left-10 w-5 flex items-center justify-center text-xs font-semibold text-white bg-red-500 rounded-full border-2 border-white -translate-x-2 translate-y-2">
+                  <span className="absolute bottom-8 left-10 w-5 flex items-center justify-center text-xs font-semibold text-white bg-yellow-500 rounded-full border-2 border-white -translate-x-2 translate-y-2">
                     {cartData.items.length}
                   </span>
                 </div>

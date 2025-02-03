@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
+import NotFound from "../components/notFound/NotFound";
 import About from "../pages/About";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateProduct from "../pages/admin/CreateProduct";
-import Blog from "../pages/Blog";
 import Cart from "../pages/Cart";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
+import MyOrder from "../pages/MyOrder";
 import Register from "../pages/Register";
 import Shop from "../pages/Shop";
 import SingleProduct from "../pages/SingleProduct";
@@ -27,8 +28,8 @@ const router = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: "blog",
-        element: <Blog />,
+        path: "my-order",
+        element: <MyOrder />,
       },
       {
         path: "about",
@@ -43,8 +44,16 @@ const router = createBrowserRouter([
         element: <VerifyPayment />,
       },
       {
-        path: "shop/:productId",
+        path: "shop/product/:productId",
         element: <SingleProduct />,
+      },
+      {
+        path: "product/:productId",
+        element: <SingleProduct />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

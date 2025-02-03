@@ -1,10 +1,14 @@
+import payMethod from "../../assets/images/pay-method.png";
+
 const Footer = () => {
   return (
-    <div>
-      <div className="mt-16">
-        <div className="grid grid-cols-5">
-          <div className="col-span-2">
-            <h1 className="text-3xl font-bold mb-6">
+    <div className="">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Grid for Footer Content */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+          {/* Column 1: Brand Info */}
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-6">
               <span className="text-customYellow">Car</span>Shop
             </h1>
             <p className="font-medium text-[#636363] mb-3">
@@ -18,6 +22,7 @@ const Footer = () => {
             </p>
           </div>
 
+          {/* Column 2: Information Links */}
           <div>
             <p className="font-semibold mb-5 uppercase">Information</p>
             <a
@@ -46,6 +51,7 @@ const Footer = () => {
             </a>
           </div>
 
+          {/* Column 3: Account Links */}
           <div>
             <p className="font-semibold mb-5 uppercase">Account</p>
             <a
@@ -74,6 +80,7 @@ const Footer = () => {
             </a>
           </div>
 
+          {/* Column 4: Quick Shop Links */}
           <div>
             <p className="font-semibold mb-5 uppercase">Quick Shop</p>
             <a
@@ -103,15 +110,16 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 py-10 border-b-8 border-customYellow">
-          <div className="col-span-3 font-medium text-[#636363]">
+        {/* Copyright and Payment Methods */}
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 py-10 border-b-8 border-customYellow mt-8">
+          <div className="col-span-1 sm:col-span-3 font-medium text-[#636363] text-center sm:text-left">
             Copyright © {new Date().getFullYear()} CarShop - All Rights
             Reserved.
           </div>
-          <div>
+          <div className="col-span-1 flex justify-center sm:justify-end">
             <img
-              className="w-full"
-              src="/assets/images/payment.png"
+              className="w-full max-w-[200px] sm:max-w-none"
+              src={payMethod}
               alt="payment methods"
             />
           </div>

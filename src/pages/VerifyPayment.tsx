@@ -38,15 +38,12 @@ interface OrderData {
 const VerifyPayment = () => {
   const [searchParams] = useSearchParams();
 
-  const { isLoading, data } = useVerifyOrderQuery(
-    searchParams.get("order_id"),
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const { data } = useVerifyOrderQuery(searchParams.get("order_id"), {
+    refetchOnMountOrArgChange: true,
+  });
   // console.log("🚀 ~ VerifyPayment ~ data:", data);
   const orderData: OrderData = data?.data?.[0];
-  console.log("🚀 ~ VerifyPayment ~ orderData:", orderData);
+  // console.log("🚀 ~ VerifyPayment ~ orderData:", orderData);
 
   return (
     <div>

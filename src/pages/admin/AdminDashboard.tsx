@@ -1,7 +1,9 @@
+import Order from "../../components/order/Order";
+
 const AdminDashboard = () => {
   return (
     <div>
-      <h1>This is AdminDashboard Component</h1>
+      <Order />
     </div>
   );
 };

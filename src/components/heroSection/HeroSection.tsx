@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import delivery from "../../assets/images/delivery.png";
 import hero1 from "../../assets/images/hero-1.jpg";
 import hero2 from "../../assets/images/hero-2.jpg";
 import hero3 from "../../assets/images/hero-3.jpg";
+import securePayment from "../../assets/images/payment.png";
+import support from "../../assets/images/support.png";
 
 const images = [hero1, hero2, hero3]; // Array of images
 
@@ -65,11 +68,7 @@ const HeroSection = () => {
       {/*  */}
       <div className="mt-5 border border-gray-200 p-5 grid grid-cols-3 rounded">
         <div className="border-r border-gray-200">
-          <img
-            className="w-16 mx-auto"
-            src="/src/assets/images/delivery.png"
-            alt=""
-          />
+          <img className="w-16 mx-auto" src={delivery} alt="" />
           <p className="text-center mt-2 mb-1 font-semibold">
             DELIVERY ON TIME
           </p>
@@ -78,18 +77,14 @@ const HeroSection = () => {
         <div className="border-r border-gray-200">
           <img
             className="w-16 mx-auto"
-            src="/src/assets/images/payment.png"
-            alt="benifits"
+            src={securePayment}
+            alt="secure payment"
           />
           <p className="text-center mt-4 mb-1 font-semibold">SECURE PAYMENT</p>
           <p className="text-center">100% secure payment</p>
         </div>
         <div>
-          <img
-            className="w-16 mx-auto"
-            src="/src/assets/images/support.png"
-            alt=""
-          />
+          <img className="w-16 mx-auto" src={support} alt="support" />
           <p className="text-center mt-2 mb-1 font-semibold">24/7 SUPPORT</p>
           <p className="text-center">Dedicated support</p>
         </div>

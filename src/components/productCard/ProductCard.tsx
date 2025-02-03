@@ -13,11 +13,15 @@ export interface IProduct {
   imageUrl?: string;
   createdAt: string;
   updatedAt: string;
+  imgUrl: string;
+  category: string;
+  brand: string;
+  model: string;
 }
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const user = useAppSelector(selectCurrentUser);
-  //   console.log("🚀 ~ ProductCard ~ product:", product);
+  // console.log("🚀 ~ ProductCard ~ product:", product);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
@@ -33,7 +37,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         price: product.price,
         quantity: 1,
         stock: product.quantity,
-        // imageUrl: product.imageUrl as string,
+        imgUrl: product.imgUrl as string,
       })
     );
     toast.success(`${product.name} added to your cart!`);
@@ -43,18 +47,20 @@ const ProductCard = ({ product }: { product: IProduct }) => {
     <div>
       <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">
         <img
-          className="h-40 mx-auto"
-          src={"/placeholder.svg"}
+          className="h-48 mx-auto rounded"
+          src={product.imgUrl}
           alt={product.name}
         />
         <p className={`uppercase mt-6 text-sm font-medium text-center`}>
-          {product.category}
+          {product?.category}
         </p>
         <p className="mt-2 font-semibold text-center text-lg text-customYellow">
           {product.name}
         </p>
-        <p className="mt-2 font-semibold text-center text-lg">
-          {product.brand} {product.model}
+        <p className="mt-2 font-semibold text-center text-md">
+          Brand: {product.brand}
+          <br />
+          Model: {product.model}
         </p>
         <p className="mt-2 font-semibold text-center">$ {product.price}</p>
 
@@ -68,22 +74,35 @@ const ProductCard = ({ product }: { product: IProduct }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="size-6"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
                 />
               </svg>
             </button>
           </div>
           <div className="tooltip ml-4" data-tip="Quick View">
-            <Link to={product._id}>
+            <Link to={`product/${product._id}`}>
               <button className="bg-slate-200 hover:bg-slate-300 p-2 rounded-full">
-                view
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
               </button>
             </Link>
           </div>

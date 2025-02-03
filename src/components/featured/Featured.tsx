@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "../../redux/features/product/productApi";
+import Loader from "../loader/Loader";
 import ProductCard from "../productCard/ProductCard";
 
 const Featured = () => {
@@ -18,7 +19,7 @@ const Featured = () => {
 
         <div>
           {isLoading ? (
-            "loading"
+            <Loader />
           ) : (
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
               {products.slice(0, 8).map((product) => (

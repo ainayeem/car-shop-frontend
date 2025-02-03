@@ -22,7 +22,7 @@ const Login = () => {
       };
       // console.log("🚀 ~ onSubmit ~ userInfo:", userInfo);
       const res = await login(userInfo).unwrap();
-      console.log("🚀 ~ onSubmit ~ res:", res);
+      // console.log("🚀 ~ onSubmit ~ res:", res);
 
       const user = verifyToken(res.data) as TUser;
       dispatch(setUser({ user: user, token: res.data }));

@@ -25,7 +25,7 @@ const persistConfig = {
   storage,
 };
 
-const persistAuthReducer = persistReducer(persistConfig, authReducer);
+// const persistAuthReducer = persistReducer(persistConfig, authReducer);
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

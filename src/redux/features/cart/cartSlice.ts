@@ -7,7 +7,7 @@ export interface ICartItem {
   price: number;
   quantity: number;
   stock: number;
-  // imageUrl: string; // Optional: for displaying in the UI
+  imgUrl: string; // Optional: for displaying in the UI
 }
 
 interface CartState {
@@ -27,7 +27,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action: PayloadAction<ICartItem>) {
-      console.log({ state: state.items });
       const existingItem = state.items.find(
         (item) => item.product === action.payload.product
       );
@@ -54,8 +53,6 @@ const cartSlice = createSlice({
       action: PayloadAction<{ id: string; quantity: number }>
     ) {
       const { id, quantity } = action.payload;
-      console.log("🚀 ~ quantity:", quantity);
-      console.log("🚀 ~ id:", id);
       const existingItem = state.items.find((item) => item.product === id);
       if (existingItem && quantity > 0) {
         const quantityDifference = quantity - existingItem.quantity;

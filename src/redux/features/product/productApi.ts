@@ -6,7 +6,6 @@ const productApi = baseApi.injectEndpoints({
     getProducts: builder.query({
       // query: (args) => "/product",
       query: (args) => {
-        console.log("🚀 ~ args:", args);
         const params = new URLSearchParams();
 
         if (args && typeof args === "object") {
@@ -23,6 +22,7 @@ const productApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["product"],
       transformResponse: (response: TResponseRedux<any[]>) => {
         return {
           data: response.data,
@@ -30,7 +30,16 @@ const productApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    createProduct: builder.mutation({
+      query: (productItems) => ({
+        url: "/product/create-product",
+        method: "POST",
+        body: productItems,
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useCreateProductMutation } = productApi;
