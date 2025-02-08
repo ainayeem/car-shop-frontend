@@ -1,13 +1,13 @@
 # CarShop E-Commerce Platform
 
 ## Overview
-This is a Car E-Commerce Platform, a web application designed to facilitate the purchase and management of cars. The platform includes user registration, authentication, role-based access control and a variety of features tailored to both users and administrators.
 
----
+This is a Car E-Commerce Platform, a web application designed to facilitate the purchase and management of cars. The platform includes user registration, authentication, role-based access control and a variety of features tailored to both users and administrators.
 
 ## Features
 
 ### User Registration & Authentication
+
 - **User Registration**: New users can create an account by providing necessary details.
 - **Login Functionality**: Registered users can log in to access personalized features.
 - **Role-Based Authentication**:
@@ -15,6 +15,7 @@ This is a Car E-Commerce Platform, a web application designed to facilitate the 
   - **Admin Role**: Enhanced access to manage cars, view all orders and oversee platform activities.
 
 ### Routing
+
 - **Public Routes**:
   - **Home Page**: Displays an overview of the platform.
   - **All Cars Page**: Lists all available cars with options to filter and sort.
@@ -26,13 +27,28 @@ This is a Car E-Commerce Platform, a web application designed to facilitate the 
     - **User Dashboard**: Users can view their order history.
     - **Admin Dashboard**: Admins can manage cars and view all orders.
 
+## Technologies Used
 
----
+- **Frontend:** React, TypeScript, Tailwind CSS
+- **Backend:** Node.js, Express.js, Mongoose
+- **Database:** MongoDB
+- **Authentication:** JWT (JSON Web Token)
+- **Payment Gateway:** SurjoPay
+- **State Management:** Redux Toolkit
+- **Deployment:** Vercel
 
-## Getting Started
+## Installation & Setup
 
-### Installation
-1. **Clone the Repository**
-2. **Install dependancy**
-3. **Run the application**
-  
+### Frontend Setup
+
+```sh
+# Install dependencies
+npm install
+
+# Start the server
+npm run dev
+```
+
+## Live Site Frontend : https://the-car-shop.vercel.app
+
+## Live Site Backend : https://car-shop-backend.vercel.app
