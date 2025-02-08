@@ -7,7 +7,7 @@ const ParallaxCover = () => {
     <div className="pb-96 lg:pb-0">
       <div
         style={{ backgroundImage: `url(${hero1})` }}
-        className="featured-item bg-fixed text-white py-6 my-20 bg-contain bg-center h-40 md:h-80 lg:h-[53vh] rounded"
+        className="featured-item bg-fixed text-white py-6 my-20 bg-contain bg-center h-40 md:h-80 lg:h-[53vh] rounded bg-no-repeat"
       >
         <div className="md:flex justify-center items-center pb-20 pt-12 px-6 md:px-36 bg-slate-800 bg-opacity-70">
           <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0">

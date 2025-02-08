@@ -1,31 +1,18 @@
 import Loader from "../components/loader/Loader";
 import { useGetMyOrdersQuery } from "../redux/features/order/orderApi";
 
+const statusSteps = ["Pending", "Paid", "Shipped", "Completed"];
+
+const getStatusIndex = (status: string) => {
+  return statusSteps.indexOf(status);
+};
+
 const MyOrder = () => {
-  // const [updateOrderStatus] = useUpdateOrderMutation();
-  //   const [deleteOrder] = useDeleteOrderMutation();
   const { isLoading, data } = useGetMyOrdersQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 
   const orderData = data?.data;
-  console.log("🚀 ~ Order ~ orderData:", orderData);
-
-  //   const handleStatusUpdate = async (orderId: string, newStatus: string) => {
-
-  //     const updateData = {
-  //       id: orderId,
-  //       data: {
-  //         status: newStatus,
-  //       },
-  //     };
-  //     const res = (await updateOrderStatus(updateData)) as TResponse<any>;
-  //     if (res.error) {
-  //       toast.error(res.error.data.message);
-  //     } else {
-  //       toast.success(res.data.message);
-  //     }
-  //   };
 
   return (
     <div>
@@ -45,6 +32,57 @@ const MyOrder = () => {
                 key={index}
                 className="bg-white p-6 rounded-lg border border-gray-200"
               >
+                {/* Status Progress Bar */}
+                {order?.status !== "Cancelled" && (
+                  <div className="mt-6">
+                    <h3 className="text-lg font-semibold mb-2">Order Status</h3>
+                    <div className="flex justify-between items-center mb-2">
+                      {statusSteps.map((_, i) => (
+                        <div
+                          key={i}
+                          className={`flex-1 h-2 mx-1 rounded-full ${
+                            i <= getStatusIndex(order?.status)
+                              ? "bg-green-500"
+                              : "bg-gray-300"
+                          }`}
+                        ></div>
+                      ))}
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-700">
+                      {statusSteps.map((step, i) => (
+                        <span
+                          key={i}
+                          className={`text-xs font-medium ${
+                            i === getStatusIndex(order?.status)
+                              ? "text-green-600 font-bold"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {step}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Status Text */}
+                <p className="text-gray-600 flex items-center">
+                  <span className="font-medium">Status:</span>
+                  <span
+                    className={`ml-2 px-3 py-1 rounded-full text-sm font-semibold ${
+                      order?.status === "Pending"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : order?.status === "Cancelled"
+                        ? "bg-red-100 text-red-700"
+                        : order?.status === "Shipped"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-green-100 text-green-700"
+                    }`}
+                  >
+                    {order?.status}
+                  </span>
+                </p>
+
                 {/* Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Customer Info */}
@@ -74,37 +112,16 @@ const MyOrder = () => {
                       <span className="font-medium">Total Price:</span> $
                       {order?.totalPrice?.toFixed(2)}
                     </p>
-                    {/*  */}
-                    <p className="text-gray-600 flex items-center">
-                      <span className="font-medium">Status:</span>
-                      <span
-                        className={`ml-2 px-3 py-1 rounded-full text-sm font-semibold ${
-                          order?.status === "Pending"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : order?.status === "Cancelled"
-                            ? "bg-red-100 text-red-700"
-                            : order?.status === "Shipped"
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-green-100 text-green-700"
-                        }`}
-                      >
-                        {order?.status}
-                      </span>
+                    <p className="text-gray-600">
+                      <span className="font-medium">Delivery Date: </span>
+                      {order?.eta
+                        ? new Date(order.eta).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "long",
+                            year: "numeric",
+                          })
+                        : "N/A"}
                     </p>
-
-                    {/* Dropdown for status selection */}
-
-                    {/* <select
-                      className="border p-2 rounded mt-2"
-                      //   onChange={(e) =>
-                      //     handleStatusUpdate(order._id, e.target.value)
-                      //   }
-                    >
-                      <option value="" disabled selected>
-                        Cancle Order
-                      </option>
-                      <option value="Cancelled">Cancell</option>
-                    </select> */}
                   </div>
                 </div>
 

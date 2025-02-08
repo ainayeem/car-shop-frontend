@@ -44,23 +44,12 @@ const MainLayout = () => {
       <li>
         <Link to="/shop">Shop</Link>
       </li>
-      {user ? (
-        <li>
-          <Link to="/my-order">My Order</Link>
-        </li>
-      ) : (
-        ""
-      )}
 
       <li>
         <Link to="/about">About</Link>
       </li>
 
-      {user ? (
-        <li>
-          <button onClick={handleLogout}>Logout</button>
-        </li>
-      ) : (
+      {!user && (
         <li>
           <Link to="/login">Login</Link>
         </li>
@@ -68,7 +57,7 @@ const MainLayout = () => {
     </>
   );
   return (
-    <div className="w-[75%] mx-auto">
+    <div className="w-[90%] lg:w-[75%] mx-auto">
       <div className="">
         <div className="navbar bg-base-100">
           <div className="navbar-start">
@@ -113,7 +102,49 @@ const MainLayout = () => {
             </ul>
           </div>
           <div className="navbar-end gap-1">
-            {/*  */}
+            {/* profile */}
+            {user && (
+              <div>
+                <div className="dropdown">
+                  <div tabIndex={0} role="" className=" m-1">
+                    {/* icon */}
+                    <div className="bg-yellow-100 hover:bg-customYellowHover duration-500 p-1 rounded-full">
+                      <div className="bg-customYellow p-2 rounded-full flex items-center justify-center relative">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="white"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow text-gray-500 font-semibold space-y-1"
+                  >
+                    <li>
+                      <Link to="/my-order">My Order</Link>
+                    </li>
+                    <li>
+                      <Link to="/change-password">Change Password</Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogout}>Logout</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+            {/* cart */}
             <div className="">
               <Link
                 to="/cart"
@@ -149,7 +180,10 @@ const MainLayout = () => {
           </div>
         </div>
       </div>
-      <Outlet />
+      {/* content */}
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

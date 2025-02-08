@@ -96,17 +96,21 @@ const Cart = () => {
                           {cart_item.quantity}
                         </span>
                         <button
-                          onClick={() =>
-                            dispatch(
-                              updateQuantity({
-                                id: cart_item.product,
-                                quantity: Math.min(
-                                  cart_item.quantity + 1,
-                                  cart_item.stock
-                                ),
-                              })
-                            )
-                          }
+                          onClick={() => {
+                            if (cart_item.quantity + 1 > cart_item.stock) {
+                              toast.warning("Stock limit exceeded!");
+                            } else {
+                              dispatch(
+                                updateQuantity({
+                                  id: cart_item.product,
+                                  quantity: Math.min(
+                                    cart_item.quantity + 1,
+                                    cart_item.stock
+                                  ),
+                                })
+                              );
+                            }
+                          }}
                           className="w-6 h-6 bg-gray-200 text-black rounded hover:bg-gray-300"
                         >
                           +

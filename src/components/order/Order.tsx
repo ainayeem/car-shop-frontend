@@ -7,34 +7,6 @@ import {
 import { TResponse } from "../../types/global";
 import Loader from "../loader/Loader";
 
-// export interface Transaction {
-//   id: string;
-//   transactionStatus: string | null;
-//   bank_status: string;
-//   date_time: string;
-//   method: string;
-//   sp_code: string;
-//   sp_message: string;
-// }
-
-// export interface Product {
-//   product: string;
-//   quantity: number;
-//   _id: string;
-// }
-
-// export interface Order {
-//   transaction: Transaction;
-//   _id: string;
-//   user: string;
-//   products: Product[];
-//   totalPrice: number;
-//   status: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   __v: number;
-// }
-
 const Order = () => {
   const [updateOrderStatus] = useUpdateOrderMutation();
   const [deleteOrder] = useDeleteOrderMutation();
@@ -43,7 +15,7 @@ const Order = () => {
   });
 
   const orderData = data?.data;
-  //   console.log("🚀 ~ Order ~ orderData:", orderData);
+  // console.log("🚀 ~ Order ~ orderData:", orderData);
 
   const handleStatusUpdate = async (orderId: string, newStatus: string) => {
     // console.log("🚀 ~ handleStatusChange ~ newStatus:", newStatus);
@@ -52,6 +24,23 @@ const Order = () => {
       id: orderId,
       data: {
         status: newStatus,
+      },
+    };
+    const res = (await updateOrderStatus(updateData)) as TResponse<any>;
+    if (res.error) {
+      toast.error(res.error.data.message);
+    } else {
+      toast.success(res.data.message);
+    }
+  };
+
+  const handleEtaChange = async (orderId: string, etaDate: string) => {
+    console.log("🚀 ~ handleEtaChange ~ etaDate:", etaDate);
+    console.log("🚀 ~ handleEtaChange ~ orderId:", orderId);
+    const updateData = {
+      id: orderId,
+      data: {
+        eta: etaDate,
       },
     };
     const res = (await updateOrderStatus(updateData)) as TResponse<any>;
@@ -111,6 +100,16 @@ const Order = () => {
                     <span className="font-medium">Total Price:</span> $
                     {order?.totalPrice?.toFixed(2)}
                   </p>
+                  <p className="text-gray-600">
+                    <span className="font-medium">Delivery Date: </span>
+                    {order?.eta
+                      ? new Date(order.eta).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "long",
+                          year: "numeric",
+                        })
+                      : "N/A"}
+                  </p>
                   {/*  */}
                   <p className="text-gray-600 flex items-center">
                     <span className="font-medium">Status:</span>
@@ -132,7 +131,7 @@ const Order = () => {
                   {/* Dropdown for status selection */}
 
                   <select
-                    className="border p-2 rounded mt-2"
+                    className="border p-2 rounded mt-2 select select-bordered w-full"
                     onChange={(e) =>
                       handleStatusUpdate(order._id, e.target.value)
                     }
@@ -140,11 +139,20 @@ const Order = () => {
                     <option value="" disabled selected>
                       Change Status
                     </option>
-                    {/* <option>Change Status</option> */}
                     <option value="Shipped">Shipped</option>
                     <option value="Completed">Completed</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
+                  {/* ETA Date Picker */}
+                  <p className="text-gray-600 flex items-center">
+                    <span className="font-medium">Arrival Time:</span>
+                  </p>
+                  <input
+                    type="date"
+                    className="input input-bordered w-full mt-2 rounded"
+                    // value={eta[order._id] || ""}
+                    onChange={(e) => handleEtaChange(order._id, e.target.value)}
+                  />
                 </div>
                 <div className="flex justify-self-center">
                   <button

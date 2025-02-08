@@ -6,6 +6,7 @@ import About from "../pages/About";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateProduct from "../pages/admin/CreateProduct";
 import Cart from "../pages/Cart";
+import ChangePassword from "../pages/ChangePassword";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import MyOrder from "../pages/MyOrder";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "my-order",
         element: <MyOrder />,
+      },
+      {
+        path: "change-password",
+        element: <ChangePassword />,
       },
       {
         path: "about",

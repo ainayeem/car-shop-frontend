@@ -28,6 +28,10 @@ const SingleProduct = () => {
       toast.warning("Please log in to add items to the cart.");
       return;
     }
+    if (product.quantity < 1) {
+      toast.warning("Insufficient Stock!");
+      return;
+    }
     // console.log("in cart functon");
     dispatch(
       addToCart({

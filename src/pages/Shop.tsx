@@ -67,8 +67,12 @@ const Shop = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <button onClick={handleSearch} className="text-gray-500 -ml-5">
+            <button
+              onClick={handleSearch}
+              className="text-gray-500 -ml-6 bg-gray-100 p-2 rounded"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -109,7 +113,9 @@ const Shop = () => {
             onChange={(e) => handleAvailabilityChange(e.target.value)}
             className="select select-bordered w-full sm:w-48 h-12"
           >
-            <option disabled>Availability</option>
+            <option selected disabled>
+              Availability
+            </option>
             <option value="true">In Stock</option>
           </select>
         </div>
@@ -121,7 +127,9 @@ const Shop = () => {
             onChange={(e) => handleSortChange(e.target.value)}
             className="select select-bordered w-full sm:w-48 h-12"
           >
-            <option disabled>Sort by Price</option>
+            <option selected disabled>
+              Sort by Price
+            </option>
             <option value="price">Low to High</option>
             <option value="-price">High to Low</option>
           </select>
@@ -147,27 +155,29 @@ const Shop = () => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center mt-8">
-        <div className="btn-group join">
-          <button
-            className="join-item btn"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Prev
-          </button>
-          <button className="join-item btn">
-            Page {currentPage} of {totalPages}
-          </button>
-          <button
-            className="join-item btn"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-8">
+          <div className="btn-group join">
+            <button
+              className="join-item btn"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </button>
+            <button className="join-item btn">
+              Page {currentPage} of {totalPages}
+            </button>
+            <button
+              className="join-item btn"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
