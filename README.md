@@ -52,3 +52,7 @@ npm run dev
 ## Live Site Frontend : https://the-car-shop.vercel.app
 
 ## Live Site Backend : https://car-shop-backend.vercel.app
+
+Admin Credientials:
+email: admin@car-shop.com
+password: 1234
