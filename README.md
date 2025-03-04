@@ -4,6 +4,15 @@
 
 This is a Car E-Commerce Platform, a web application designed to facilitate the purchase and management of cars. The platform includes user registration, authentication, role-based access control and a variety of features tailored to both users and administrators.
 
+## Live Site Frontend : https://the-car-shop.vercel.app
+
+## Live Site Backend : https://car-shop-backend.vercel.app
+
+Admin Credientials:
+email: admin@car-shop.com
+password: 1234
+
+
 ## Features
 
 ### User Registration & Authentication
@@ -49,6 +58,4 @@ npm install
 npm run dev
 ```
 
-## Live Site Frontend : https://the-car-shop.vercel.app
 
-## Live Site Backend : https://car-shop-backend.vercel.app
