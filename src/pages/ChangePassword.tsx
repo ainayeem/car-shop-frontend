@@ -1,12 +1,16 @@
 import { FieldValues, useForm } from "react-hook-form";
+import { FaArrowLeft, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useChangePasswordMutation } from "../redux/features/auth/authApi";
-import { FaLock, FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const ChangePassword = () => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
   const [changePassword] = useChangePasswordMutation();
   const navigate = useNavigate();
 
@@ -46,7 +50,9 @@ const ChangePassword = () => {
                   <FaLock className="text-2xl text-customYellow" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Change Password</h1>
+                  <h1 className="text-2xl font-bold text-gray-900">
+                    Change Password
+                  </h1>
                   <p className="text-gray-600">Update your account password</p>
                 </div>
               </div>

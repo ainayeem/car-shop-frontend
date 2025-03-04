@@ -1,12 +1,25 @@
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import {
+  FaBox,
+  FaCalendarAlt,
+  FaCar,
+  FaCheck,
+  FaDollarSign,
+  FaImage,
+  FaTag,
+  FaTimes,
+} from "react-icons/fa";
 import { toast } from "sonner";
 import { useCreateProductMutation } from "../../redux/features/product/productApi";
 import { TResponse } from "../../types/global";
-import { useState } from "react";
-import { FaCar, FaTag, FaCalendarAlt, FaDollarSign, FaBox, FaImage, FaCheck, FaTimes } from "react-icons/fa";
 
 const CreateProduct = () => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [createProduct] = useCreateProductMutation();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -66,8 +79,12 @@ const CreateProduct = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Header */}
           <div className="px-6 py-8 border-b border-gray-200">
-            <h1 className="text-3xl font-bold text-gray-900 text-center">Create New Product</h1>
-            <p className="mt-2 text-center text-gray-600">Fill in the details to add a new vehicle to your inventory</p>
+            <h1 className="text-3xl font-bold text-gray-900 text-center">
+              Create New Product
+            </h1>
+            <p className="mt-2 text-center text-gray-600">
+              Fill in the details to add a new vehicle to your inventory
+            </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-8">
@@ -83,11 +100,15 @@ const CreateProduct = () => {
                   type="text"
                   {...register("name", { required: "Name is required" })}
                   placeholder="Enter product name"
-                  className={`input input-bordered w-full ${errors.name ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  className={`input input-bordered w-full ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                 />
                 {errors.name && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.name.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.name.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -103,11 +124,15 @@ const CreateProduct = () => {
                   type="text"
                   {...register("brand", { required: "Brand is required" })}
                   placeholder="Enter brand name"
-                  className={`input input-bordered w-full ${errors.brand ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  className={`input input-bordered w-full ${
+                    errors.brand ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                 />
                 {errors.brand && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.brand.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.brand.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -123,11 +148,15 @@ const CreateProduct = () => {
                   type="text"
                   {...register("model", { required: "Model is required" })}
                   placeholder="Enter model name"
-                  className={`input input-bordered w-full ${errors.model ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  className={`input input-bordered w-full ${
+                    errors.model ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                 />
                 {errors.model && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.model.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.model.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -145,11 +174,15 @@ const CreateProduct = () => {
                   max={new Date().getFullYear() + 1}
                   {...register("year", { required: "Year is required" })}
                   placeholder="Enter year"
-                  className={`input input-bordered w-full ${errors.year ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  className={`input input-bordered w-full ${
+                    errors.year ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                 />
                 {errors.year && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.year.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.year.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -162,19 +195,25 @@ const CreateProduct = () => {
                   </span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                    $
+                  </span>
                   <input
                     type="number"
                     min="0"
                     step="0.01"
                     {...register("price", { required: "Price is required" })}
                     placeholder="0.00"
-                    className={`input input-bordered w-full pl-8 ${errors.price ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                    className={`input input-bordered w-full pl-8 ${
+                      errors.price ? "border-red-500" : "border-gray-300"
+                    } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                   />
                 </div>
                 {errors.price && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.price.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.price.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -187,10 +226,16 @@ const CreateProduct = () => {
                   </span>
                 </label>
                 <select
-                  {...register("category", { required: "Category is required" })}
-                  className={`select select-bordered w-full ${errors.category ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  {...register("category", {
+                    required: "Category is required",
+                  })}
+                  className={`select select-bordered w-full ${
+                    errors.category ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                 >
-                  <option value="" disabled selected>Select a category</option>
+                  <option value="" disabled selected>
+                    Select a category
+                  </option>
                   <option value="Sedan">Sedan</option>
                   <option value="SUV">SUV</option>
                   <option value="Truck">Truck</option>
@@ -199,7 +244,9 @@ const CreateProduct = () => {
                 </select>
                 {errors.category && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.category.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.category.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -207,17 +254,25 @@ const CreateProduct = () => {
               {/* Description */}
               <div className="form-control md:col-span-2">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">Description</span>
+                  <span className="label-text font-medium text-gray-700">
+                    Description
+                  </span>
                 </label>
                 <textarea
-                  {...register("description", { required: "Description is required" })}
+                  {...register("description", {
+                    required: "Description is required",
+                  })}
                   placeholder="Enter product description"
-                  className={`textarea textarea-bordered w-full ${errors.description ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  className={`textarea textarea-bordered w-full ${
+                    errors.description ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                   rows={4}
                 ></textarea>
                 {errors.description && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.description.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.description.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -232,13 +287,20 @@ const CreateProduct = () => {
                 <input
                   type="number"
                   min="0"
-                  {...register("quantity", { required: "Quantity is required", min: 1 })}
+                  {...register("quantity", {
+                    required: "Quantity is required",
+                    min: 1,
+                  })}
                   placeholder="Enter quantity"
-                  className={`input input-bordered w-full ${errors.quantity ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
+                  className={`input input-bordered w-full ${
+                    errors.quantity ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-customYellow focus:border-transparent transition duration-300`}
                 />
                 {errors.quantity && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.quantity.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.quantity.message as string}
+                    </span>
                   </label>
                 )}
               </div>
@@ -255,16 +317,24 @@ const CreateProduct = () => {
                   accept="image/*"
                   {...register("imgUrl", { required: "Image is required" })}
                   onChange={handleImageChange}
-                  className={`file-input file-input-bordered w-full ${errors.imgUrl ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`file-input file-input-bordered w-full ${
+                    errors.imgUrl ? "border-red-500" : "border-gray-300"
+                  }`}
                 />
                 {errors.imgUrl && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.imgUrl.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.imgUrl.message as string}
+                    </span>
                   </label>
                 )}
                 {imagePreview && (
                   <div className="mt-2">
-                    <img src={imagePreview} alt="Preview" className="w-full h-32 object-cover rounded-lg" />
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
                   </div>
                 )}
               </div>
@@ -272,14 +342,18 @@ const CreateProduct = () => {
               {/* In Stock */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">Stock Status</span>
+                  <span className="label-text font-medium text-gray-700">
+                    Stock Status
+                  </span>
                 </label>
                 <div className="flex gap-6">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
                       value="true"
-                      {...register("inStock", { required: "Stock status is required" })}
+                      {...register("inStock", {
+                        required: "Stock status is required",
+                      })}
                       className="radio checked:bg-green-500"
                     />
                     <span className="flex items-center gap-1">
@@ -291,7 +365,9 @@ const CreateProduct = () => {
                     <input
                       type="radio"
                       value="false"
-                      {...register("inStock", { required: "Stock status is required" })}
+                      {...register("inStock", {
+                        required: "Stock status is required",
+                      })}
                       className="radio checked:bg-red-500"
                     />
                     <span className="flex items-center gap-1">
@@ -302,7 +378,9 @@ const CreateProduct = () => {
                 </div>
                 {errors.inStock && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">{errors.inStock.message as string}</span>
+                    <span className="label-text-alt text-red-500">
+                      {errors.inStock.message as string}
+                    </span>
                   </label>
                 )}
               </div>
