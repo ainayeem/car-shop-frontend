@@ -4,6 +4,7 @@ import { clearCart } from "../../redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { verifyToken } from "../../utils/verifyToken";
 import Footer from "../footer/Footer";
+import { useState } from "react";
 
 const userRole = {
   ADMIN: "admin",
@@ -14,6 +15,7 @@ const MainLayout = () => {
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   let user;
   if (token) {
@@ -31,124 +33,82 @@ const MainLayout = () => {
       {userRoleValue === userRole.ADMIN && (
         <>
           <li>
-            <Link to="/admin/admin-dashboard">Dashboard</Link>
+            <Link to="/admin/admin-dashboard" className="hover:text-customYellow transition-colors">Dashboard</Link>
           </li>
           <li>
-            <Link to="/admin/create-product">Create Product</Link>
+            <Link to="/admin/create-product" className="hover:text-customYellow transition-colors">Create Product</Link>
           </li>
         </>
       )}
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/" className="hover:text-customYellow transition-colors">Home</Link>
       </li>
       <li>
-        <Link to="/shop">Shop</Link>
+        <Link to="/shop" className="hover:text-customYellow transition-colors">Shop</Link>
       </li>
-
       <li>
-        <Link to="/about">About</Link>
+        <Link to="/about" className="hover:text-customYellow transition-colors">About</Link>
       </li>
-
       {!user && (
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/login" className="hover:text-customYellow transition-colors">Login</Link>
         </li>
       )}
     </>
   );
+
   return (
-    <div className="w-[90%] lg:w-[75%] mx-auto">
-      <div className="">
-        <div className="navbar bg-base-100">
-          <div className="navbar-start">
-            <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:hidden"
+    <div className="min-h-screen bg-gray-50">
+      {/* Navbar */}
+      <div className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 sm:h-20">
+            {/* Logo and Mobile Menu Button */}
+            <div className="flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-customYellow"
               >
+                <span className="sr-only">Open main menu</span>
                 <svg
+                  className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-gray-500 font-semibold"
-              >
-                {navbarItems}
-              </ul>
-            </div>
-            {/* <a className="btn btn-ghost text-xl"></a> */}
-            <div className="text-3xl font-bold flex items-center">
-              <Link to="/">
-                <span className="text-customYellow">Car</span>Shop
+                <svg
+                  className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <Link to="/" className="ml-2 sm:ml-4">
+                <span className="text-2xl sm:text-3xl font-bold">
+                  <span className="text-customYellow">Car</span>Shop
+                </span>
               </Link>
             </div>
-          </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 text-gray-500 font-semibold gap-2">
-              {navbarItems}
-            </ul>
-          </div>
-          <div className="navbar-end gap-1">
-            {/* profile */}
-            {user && (
-              <div>
-                <div className="dropdown">
-                  <div tabIndex={0} role="" className=" m-1">
-                    {/* icon */}
-                    <div className="bg-yellow-100 hover:bg-customYellowHover duration-500 p-1 rounded-full">
-                      <div className="bg-customYellow p-2 rounded-full flex items-center justify-center relative">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="white"
-                          className="size-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow text-gray-500 font-semibold space-y-1"
-                  >
-                    <li>
-                      <Link to="/my-order">My Order</Link>
-                    </li>
-                    <li>
-                      <Link to="/change-password">Change Password</Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogout}>Logout</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
-            {/* cart */}
-            <div className="">
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex lg:items-center lg:space-x-8">
+              <nav className="flex space-x-8">
+                {navbarItems}
+              </nav>
+            </div>
+
+            {/* Right Side Actions */}
+            <div className="flex items-center space-x-4">
+              {/* Cart */}
               <Link
                 to="/cart"
-                className="relative flex items-center bg-yellow-100 hover:bg-customYellowHover duration-500 p-1 rounded-full"
+                className="relative p-2 rounded-full hover:bg-gray-100 transition-colors"
               >
                 <div className="bg-customYellow p-2 rounded-full flex items-center justify-center relative">
                   <svg
@@ -169,21 +129,62 @@ const MainLayout = () => {
                     <path d="M17 17h-11v-14h-2" />
                     <path d="M6 5l14 1l-1 7h-13" />
                   </svg>
-
-                  <span className="absolute bottom-8 left-10 w-5 flex items-center justify-center text-xs font-semibold text-white bg-yellow-500 rounded-full border-2 border-white -translate-x-2 translate-y-2">
-                    {cartData.items.length}
-                  </span>
+                  {cartData.items.length > 0 && (
+                    <span className="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center text-xs font-semibold text-white bg-yellow-500 rounded-full border-2 border-white">
+                      {cartData.items.length}
+                    </span>
+                  )}
                 </div>
               </Link>
-              {/*  */}
+
+              {/* Profile Dropdown */}
+              {user && (
+                <div className="relative">
+                  <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                      <div className="bg-customYellow p-2 rounded-full flex items-center justify-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="white"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-52 mt-2">
+                      <li><Link to="/my-order" className="hover:text-customYellow">My Order</Link></li>
+                      <li><Link to="/change-password" className="hover:text-customYellow">Change Password</Link></li>
+                      <li><button onClick={handleLogout} className="hover:text-customYellow">Logout</button></li>
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden`}>
+          <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg">
+            {navbarItems}
+          </div>
+        </div>
       </div>
-      {/* content */}
-      <div className="min-h-screen">
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Outlet />
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

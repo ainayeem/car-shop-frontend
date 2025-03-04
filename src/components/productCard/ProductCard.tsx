@@ -69,7 +69,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       <div className="border border-gray-100 py-8 rounded hover:border-gray-50 hover:shadow-xl transition duration-300 relative">
         <img
           className="h-48 mx-auto rounded"
-          src={product.imgUrl}
+          src={product.imgUrl?.replace(/(upload\/)/, "$1w_500/f_webp/")}
           alt={product.name}
         />
         <p className={`uppercase mt-6 text-sm font-medium text-center`}>

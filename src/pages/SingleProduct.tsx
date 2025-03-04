@@ -3,25 +3,16 @@ import { toast } from "sonner";
 import Loader from "../components/loader/Loader";
 import { selectCurrentUser } from "../redux/features/auth/authSlice";
 import { addToCart } from "../redux/features/cart/cartSlice";
-import { useGetProductsQuery } from "../redux/features/product/productApi";
+import { useGetSingleProductQuery } from "../redux/features/product/productApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useScrollToTop } from "../utils/scrollToTop";
 
 const SingleProduct = () => {
   const user = useAppSelector(selectCurrentUser);
   const { productId } = useParams();
-  const { isLoading, data } = useGetProductsQuery(undefined);
+  const { isLoading, data } = useGetSingleProductQuery(productId);
   const dispatch = useAppDispatch();
-
-  const products = data?.data || [];
-  const product = products.find((item) => item._id === productId);
-  //   console.log("🚀 ~ SingleProduct ~ product:", product);
-  if (!product) {
-    return (
-      <div className="text-center text-lg font-semibold py-10 text-customYellow">
-        Product not found!
-      </div>
-    );
-  }
+  const product = data?.data;
 
   const handleAddToCart = () => {
     if (!user) {
@@ -45,16 +36,16 @@ const SingleProduct = () => {
     );
     toast.success(`${product.name} added to your cart!`);
   };
-
+  useScrollToTop();
   return (
     <div>
       {isLoading ? (
         <Loader />
-      ) : (
+      ) : product ? (
         <div className="container mx-auto p-4">
           <div className="max-w-4xl mx-auto bg-white shadow-sm rounded-lg overflow-hidden">
             <img
-              src={product.imgUrl}
+              src={product?.imgUrl?.replace(/(upload\/)/, "$1w_800/f_webp/")}
               alt={product.name}
               className="w-full h-72 object-cover"
             />
@@ -114,6 +105,10 @@ const SingleProduct = () => {
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="text-center text-lg font-semibold py-10 text-customYellow">
+          Product not found!
         </div>
       )}
     </div>

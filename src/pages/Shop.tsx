@@ -112,8 +112,9 @@ const Shop = () => {
             value={availability}
             onChange={(e) => handleAvailabilityChange(e.target.value)}
             className="select select-bordered w-full sm:w-48 h-12"
+            defaultValue="default"
           >
-            <option selected disabled>
+            <option value="default" disabled>
               Availability
             </option>
             <option value="true">In Stock</option>
@@ -126,8 +127,9 @@ const Shop = () => {
             value={sortOption}
             onChange={(e) => handleSortChange(e.target.value)}
             className="select select-bordered w-full sm:w-48 h-12"
+            defaultValue="default"
           >
-            <option selected disabled>
+            <option value="default" disabled>
               Sort by Price
             </option>
             <option value="price">Low to High</option>
