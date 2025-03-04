@@ -61,36 +61,16 @@ const CreateProduct = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden">
-        {/* Background Image Container */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-            alt="Car Dealership"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-800/80"></div>
-        </div>
-
-        {/* Content */}
-        <div className="relative h-full flex items-center justify-center">
-          <div className="text-center px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-              Create New Product
-            </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto">
-              Fill in the details to add a new vehicle to your inventory
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 space-y-6 sm:space-y-8">
+          {/* Header */}
+          <div className="px-6 py-8 border-b border-gray-200">
+            <h1 className="text-3xl font-bold text-gray-900 text-center">Create New Product</h1>
+            <p className="mt-2 text-center text-gray-600">Fill in the details to add a new vehicle to your inventory</p>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Name */}
               <div className="form-control">

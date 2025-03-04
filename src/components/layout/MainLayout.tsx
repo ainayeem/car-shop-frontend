@@ -32,27 +32,27 @@ const MainLayout = () => {
     <>
       {userRoleValue === userRole.ADMIN && (
         <>
-          <li>
-            <Link to="/admin/admin-dashboard" className="hover:text-customYellow transition-colors">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/admin/create-product" className="hover:text-customYellow transition-colors">Create Product</Link>
-          </li>
+          <Link to="/admin/admin-dashboard" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+            Dashboard
+          </Link>
+          <Link to="/admin/create-product" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+            Create Product
+          </Link>
         </>
       )}
-      <li>
-        <Link to="/" className="hover:text-customYellow transition-colors">Home</Link>
-      </li>
-      <li>
-        <Link to="/shop" className="hover:text-customYellow transition-colors">Shop</Link>
-      </li>
-      <li>
-        <Link to="/about" className="hover:text-customYellow transition-colors">About</Link>
-      </li>
+      <Link to="/" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+        Home
+      </Link>
+      <Link to="/shop" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+        Shop
+      </Link>
+      <Link to="/about" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+        About
+      </Link>
       {!user && (
-        <li>
-          <Link to="/login" className="hover:text-customYellow transition-colors">Login</Link>
-        </li>
+        <Link to="/login" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+          Login
+        </Link>
       )}
     </>
   );

@@ -5,14 +5,14 @@ import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import delivery from "../../assets/images/delivery.png";
-// import hero1 from "../../assets/images/hero-1.jpg";
+import hero1 from "../../assets/images/hero-1.jpg";
 import hero2 from "../../assets/images/hero-2.jpg";
 import hero3 from "../../assets/images/hero-3.jpg";
 import securePayment from "../../assets/images/payment.png";
 import support from "../../assets/images/support.png";
 
 const slides = [
-  // { id: 1, image: hero1, title: "Find Your Best Car Here" },
+  { id: 1, image: hero1, title: "Find Your Best Car Here" },
   { id: 2, image: hero2, title: "Luxury Rides" },
   { id: 3, image: hero3, title: "Drive in Style" },
 ];
@@ -30,7 +30,7 @@ const HeroSection = () => {
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative pt-24 pb-52 px-20 bg-no-repeat bg-cover bg-center"
+              className="relative pt-24 pb-52 px-5 lg:px-20 bg-no-repeat bg-cover bg-center h-0 lg:h-96"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               {/* Overlay */}
@@ -38,12 +38,12 @@ const HeroSection = () => {
 
               {/* Content */}
               <div className="relative">
-                <h1 className="text-7xl font-bold my-5 -ml-2 text-white">
+                <h1 className="text-4xl lg:text-7xl font-bold my-5 -ml-2 text-white">
                   {slide.title}
                 </h1>
                 <Link
                   to="/shop"
-                  className="bg-customYellow px-5 py-3 rounded-full text-white font-medium"
+                  className="bg-customYellow px-3 lg:px-5 py-3 rounded-full text-white font-medium"
                 >
                   View All Cars
                 </Link>

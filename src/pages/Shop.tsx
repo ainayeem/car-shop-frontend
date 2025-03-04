@@ -41,7 +41,6 @@ const Shop = () => {
   );
 
   const products = data?.data || [];
-  // const totalProducts = data?.meta?.total || 0;
   const totalPagesFromBackend = data?.meta?.totalPage || 1;
 
   useEffect(() => {
@@ -51,8 +50,21 @@ const Shop = () => {
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
+      setTimeout(() => {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: 'smooth' 
+        });
+      }, 100);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
+  }, [search, filterCategory, availability, sortOption]);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -118,6 +130,7 @@ const Shop = () => {
               Availability
             </option>
             <option value="true">In Stock</option>
+            <option value="false">Out of Stock</option>
           </select>
         </div>
 
@@ -148,7 +161,7 @@ const Shop = () => {
             <p className="text-center mt-2">No car available!</p>
           </div>
         ) : (
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-7">
             {products.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
@@ -158,26 +171,98 @@ const Shop = () => {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center mt-8">
-          <div className="btn-group join">
+        <div className="flex flex-col items-center gap-4 mt-12">
+          <div className="flex items-center gap-2">
             <button
-              className="join-item btn"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                currentPage === 1
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-gray-700 hover:bg-gray-50 hover:text-customYellow border border-gray-200"
+              }`}
             >
-              Prev
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+              
             </button>
-            <button className="join-item btn">
-              Page {currentPage} of {totalPages}
-            </button>
+
+            <div className="flex items-center gap-1">
+              {[...Array(totalPages)].map((_, index) => {
+                const pageNumber = index + 1;
+                const isCurrentPage = pageNumber === currentPage;
+                const isNearCurrentPage =
+                  Math.abs(pageNumber - currentPage) <= 1 ||
+                  pageNumber === 1 ||
+                  pageNumber === totalPages;
+
+                if (!isNearCurrentPage) {
+                  if (pageNumber === 2 || pageNumber === totalPages - 1) {
+                    return (
+                      <span key={pageNumber} className="px-2 text-gray-400">
+                        ...
+                      </span>
+                    );
+                  }
+                  return null;
+                }
+
+                return (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`w-10 h-10 rounded-lg transition-all duration-200 ${
+                      isCurrentPage
+                        ? "bg-customYellow text-white hover:bg-customYellowHover"
+                        : "bg-white text-gray-700 hover:bg-gray-50 hover:text-customYellow border border-gray-200"
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                );
+              })}
+            </div>
+
             <button
-              className="join-item btn"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+                currentPage === totalPages
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-gray-700 hover:bg-gray-50 hover:text-customYellow border border-gray-200"
+              }`}
             >
-              Next
+              
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
             </button>
           </div>
+
+      
         </div>
       )}
     </div>
