@@ -11,6 +11,7 @@ import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import MyOrder from "../pages/MyOrder";
 import Register from "../pages/Register";
+import ServicesPage from "../pages/Services";
 import Shop from "../pages/Shop";
 import SingleProduct from "../pages/SingleProduct";
 import VerifyPayment from "../pages/VerifyPayment";
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "shop",
         element: <Shop />,
+      },
+      {
+        path: "services",
+        element: <ServicesPage />,
       },
       {
         path: "my-order",

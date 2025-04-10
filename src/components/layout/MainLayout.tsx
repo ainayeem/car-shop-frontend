@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { logout, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { clearCart } from "../../redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { verifyToken } from "../../utils/verifyToken";
 import Footer from "../footer/Footer";
-import { useState } from "react";
 
 const userRole = {
   ADMIN: "admin",
@@ -32,25 +32,50 @@ const MainLayout = () => {
     <>
       {userRoleValue === userRole.ADMIN && (
         <>
-          <Link to="/admin/admin-dashboard" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+          <Link
+            to="/admin/admin-dashboard"
+            className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+          >
             Dashboard
           </Link>
-          <Link to="/admin/create-product" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+          <Link
+            to="/admin/create-product"
+            className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+          >
             Create Product
           </Link>
         </>
       )}
-      <Link to="/" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+      <Link
+        to="/"
+        className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+      >
         Home
       </Link>
-      <Link to="/shop" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+      <Link
+        to="/shop"
+        className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+      >
         Shop
       </Link>
-      <Link to="/about" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+      <Link
+        to="/services"
+        className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+      >
+        Services
+      </Link>
+
+      <Link
+        to="/about"
+        className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+      >
         About
       </Link>
       {!user && (
-        <Link to="/login" className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors">
+        <Link
+          to="/login"
+          className="block px-3 py-2 text-gray-700 hover:text-customYellow transition-colors"
+        >
           Login
         </Link>
       )}
@@ -71,22 +96,32 @@ const MainLayout = () => {
               >
                 <span className="sr-only">Open main menu</span>
                 <svg
-                  className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
+                  className={`${isMenuOpen ? "hidden" : "block"} h-6 w-6`}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
                 <svg
-                  className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
+                  className={`${isMenuOpen ? "block" : "hidden"} h-6 w-6`}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               <Link to="/" className="ml-2 sm:ml-4">
@@ -98,9 +133,7 @@ const MainLayout = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex lg:items-center lg:space-x-8">
-              <nav className="flex space-x-8">
-                {navbarItems}
-              </nav>
+              <nav className="flex space-x-8">{navbarItems}</nav>
             </div>
 
             {/* Right Side Actions */}
@@ -141,7 +174,11 @@ const MainLayout = () => {
               {user && (
                 <div className="relative">
                   <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                    >
                       <div className="bg-customYellow p-2 rounded-full flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -159,10 +196,34 @@ const MainLayout = () => {
                         </svg>
                       </div>
                     </div>
-                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-52 mt-2">
-                      <li><Link to="/my-order" className="hover:text-customYellow">My Order</Link></li>
-                      <li><Link to="/change-password" className="hover:text-customYellow">Change Password</Link></li>
-                      <li><button onClick={handleLogout} className="hover:text-customYellow">Logout</button></li>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-52 mt-2"
+                    >
+                      <li>
+                        <Link
+                          to="/my-order"
+                          className="hover:text-customYellow"
+                        >
+                          My Order
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/change-password"
+                          className="hover:text-customYellow"
+                        >
+                          Change Password
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogout}
+                          className="hover:text-customYellow"
+                        >
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -172,7 +233,7 @@ const MainLayout = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`${isMenuOpen ? 'block' : 'hidden'} lg:hidden`}>
+        <div className={`${isMenuOpen ? "block" : "hidden"} lg:hidden`}>
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg">
             {navbarItems}
           </div>

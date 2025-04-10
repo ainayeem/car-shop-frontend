@@ -7,7 +7,7 @@ import { useAppDispatch } from "../redux/hooks";
 import { verifyToken } from "../utils/verifyToken";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -31,6 +31,18 @@ const Login = () => {
     } catch (err) {
       toast.error("Not found!", { id: toastId });
     }
+  };
+
+  const handleDemoLogin = async (role: "admin" | "user") => {
+    const credentials =
+      role === "admin"
+        ? { email: "admin@car-shop.com", password: "1234" }
+        : { email: "user@car-shop.com", password: "1234" };
+
+    setValue("email", credentials.email);
+    setValue("password", credentials.password);
+
+    await onSubmit(credentials);
   };
 
   return (
@@ -77,6 +89,23 @@ const Login = () => {
             >
               Login
             </button>
+            {/* Demo Login Buttons */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => handleDemoLogin("user")}
+                type="submit"
+                className="w-full bg-customYellow text-white py-2 rounded-lg text-lg font-semibold hover:bg-customYellowHover transition duration-300"
+              >
+                Demo User
+              </button>
+              <button
+                onClick={() => handleDemoLogin("admin")}
+                type="submit"
+                className="w-full bg-customYellow text-white py-2 rounded-lg text-lg font-semibold hover:bg-customYellowHover transition duration-300"
+              >
+                Demo Admin
+              </button>
+            </div>
             <p>
               Don&apos;t have an account?{" "}
               <Link
